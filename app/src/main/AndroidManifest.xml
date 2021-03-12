@@ -17,6 +17,7 @@
         <activity android:name=".ProfileInfoActivityMichel"></activity>
         <activity android:name=".SignUpActivity_Michel" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ForgotPasswordMichel" />
         <activity android:name=".EditorNotaActivity" />
         <activity android:name=".LoginActivityMichel">
             <intent-filter>
