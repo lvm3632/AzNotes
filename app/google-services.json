@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "814713222197",
+    "project_id": "aznotes-5d375",
+    "storage_bucket": "aznotes-5d375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814713222197:android:69294f6722bd3147ee6d7c",
+        "android_client_info": {
+          "package_name": "com.example.aznotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814713222197-6468b78u9ou74nd59jolujip4lr723ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEfw5hXkW6Xb060nlLr0dTHCgDn8ys7cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814713222197-6468b78u9ou74nd59jolujip4lr723ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814713222197:android:63a6ca31f003838cee6d7c",
+        "android_client_info": {
+          "package_name": "mx.tec.wodable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814713222197-6468b78u9ou74nd59jolujip4lr723ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEfw5hXkW6Xb060nlLr0dTHCgDn8ys7cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814713222197-6468b78u9ou74nd59jolujip4lr723ah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
