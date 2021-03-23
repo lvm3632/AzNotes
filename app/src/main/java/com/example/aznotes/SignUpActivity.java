@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class SignUpActivity_Michel extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity{
 
     private TextView nuevoUsuario,
             bienvenidoLabel,
@@ -60,7 +60,7 @@ public class SignUpActivity_Michel extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_michel);
+        setContentView(R.layout.activity_sign_up);
 
         signUpImageView = findViewById(R.id.signUpImageView);
         bienvenidoLabel = findViewById(R.id.bienvenidoLabel);
@@ -110,22 +110,23 @@ public class SignUpActivity_Michel extends AppCompatActivity{
 
         if(nombre.isEmpty()){
             nameTextField.setError("Ingresa un nombre");
-            Toast.makeText(SignUpActivity_Michel.this, "Campo vacío", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "Campo vacío", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
-            Toast.makeText(SignUpActivity_Michel.this, "Correo inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "Correo inválido", Toast.LENGTH_SHORT).show();
             return;
         }else{
             emailEditText.setError(null);
         }
         if(password.isEmpty() || confirmPassword.isEmpty() || password.length() < 6 || confirmPassword.length() < 6 ){
             passwordEditText.setError("Se necesitan más de 6 carácteres");
-            Toast.makeText(SignUpActivity_Michel.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
         }else if(!Pattern.compile("[0-9]").matcher(password).find()){
             passwordEditText.setError("La contraseña necesita al menos un número");
-            Toast.makeText(SignUpActivity_Michel.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
             return;
         }else{
             passwordEditText.setError(null);
@@ -133,7 +134,7 @@ public class SignUpActivity_Michel extends AppCompatActivity{
 
         if(!confirmPassword.equals(password)){
             confirmPasswordEditText.setError("Deben ser iguales");
-            Toast.makeText(SignUpActivity_Michel.this, "Las contraseñas deben ser iguales", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, "Las contraseñas deben ser iguales", Toast.LENGTH_SHORT).show();
             return;
         }else{
             registrar(email, password,nombre);
@@ -160,37 +161,37 @@ public class SignUpActivity_Michel extends AppCompatActivity{
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Log.wtf("Usuario creado - ", "onSuccess: user Profile is created for " + user);
-                                    Toast.makeText(SignUpActivity_Michel.this, "Registro completo", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this, "Registro completo", Toast.LENGTH_LONG).show();
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Log.d("Error usuario:", "onFailure: " + e.toString());
-                                    Toast.makeText(SignUpActivity_Michel.this, e.toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignUpActivity.this, e.toString(), Toast.LENGTH_LONG).show();
 
                                 }
                             });
 
                             isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
-                            SignUpActivity_Michel.setIsNewUser(isNewUser);
+                            SignUpActivity.setIsNewUser(isNewUser);
                             if(isNewUser){
-                                Intent intent = new Intent(SignUpActivity_Michel.this, ProfileInfoActivityMichel.class);
+                                Intent intent = new Intent(SignUpActivity.this, ProfileInfoActivity.class);
                                 startActivity(intent);
-                                Toast.makeText(SignUpActivity_Michel.this, "Nuevo usuario", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignUpActivity.this, "Nuevo usuario", Toast.LENGTH_LONG).show();
                                 finish();
                             }
                         }else{
 
 
-                            Toast.makeText(SignUpActivity_Michel.this, "Fallo en registrarse"  + task.getException(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Fallo en registrarse"  + task.getException(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
     public void transitionBack(){
         // La clase en la que estamos, y la clase a la que queremos ir
-        Intent intent = new Intent(SignUpActivity_Michel.this, LoginActivityMichel.class);
+        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         // Arreglo de animaciones
         Pair[] pairs = new Pair[7];
         pairs[0] = new Pair<View, String>(signUpImageView, "LogoImageTrans");
@@ -202,7 +203,7 @@ public class SignUpActivity_Michel extends AppCompatActivity{
         pairs[6] = new Pair<View, String>(nuevoUsuario, "newUserTrans");
         // Hace las animaciones si la versión es mayor a lollipop o igual
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUpActivity_Michel.this, pairs);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUpActivity.this, pairs);
             startActivity(intent, options.toBundle());
         }else{
             startActivity(intent);

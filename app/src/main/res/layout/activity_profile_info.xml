@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="8dp"
-    tools:context=".ProfileInfoActivityMichel">
+    tools:context=".ProfileInfoActivity">
 
     <TextView
         android:id="@+id/saludoProfile"
@@ -20,28 +20,63 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lblDatosPersonales"
+        android:id="@+id/lblUltimaNota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
         android:layout_marginTop="24dp"
-        android:text="Datos personales"
+        android:text=""
         android:textColor="#1535EA"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saludoProfile" />
 
+    <TextView
+        android:id="@+id/tituloUltimaNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="24dp"
+        android:text=""
+        android:textColor="#1535EA"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblUltimaNota" />
+
+    <TextView
+        android:id="@+id/textUltimaNota"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="24dp"
+        android:text=""
+        android:textColor="#1535EA"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloUltimaNota" />
+
+    <TextView
+        android:id="@+id/textNumeroDeNotas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textColor="#1535EA"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textUltimaNota" />
     <Button
         android:id="@+id/buttonEditarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="264dp"
+        android:layout_marginBottom="140dp"
         android:background="@drawable/diseno_botones"
         android:gravity="center"
-        android:onClick="verNotas"
-        android:text="Ver Notas"
+        android:onClick="escribirNota"
+        android:text="Escribir nota"
         android:textColor="@drawable/texto_botones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +89,7 @@
         android:layout_width="141dp"
         android:layout_height="50dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="266dp"
+        android:layout_marginBottom="138dp"
         android:background="@drawable/diseno_botones"
         android:gravity="center"
         android:onClick="goToMenuGrid"
@@ -62,13 +97,14 @@
         android:textColor="@drawable/texto_botones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonEditarDatos"/>
+        app:layout_constraintStart_toEndOf="@+id/buttonEditarDatos" />
+
     <Button
         android:id="@+id/buttonLogOut"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/diseno_botones"
         android:onClick="logOut"
         android:text="Salir"

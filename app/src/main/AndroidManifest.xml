@@ -14,12 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AzNotes">
-        <activity android:name=".ProfileInfoActivityMichel"></activity>
-        <activity android:name=".SignUpActivity_Michel" />
+        <activity android:name=".EditarNota"/>
+        <activity android:name=".EscribirNota" />
+        <activity android:name=".GridMenuActivity" />
+        <activity android:name=".ProfileInfoActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ForgotPasswordMichel" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".RecyclerActivityNotas" />
         <activity android:name=".EditorNotaActivity" />
-        <activity android:name=".LoginActivityMichel">
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoadingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

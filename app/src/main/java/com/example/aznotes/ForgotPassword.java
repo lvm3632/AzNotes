@@ -15,14 +15,14 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgotPasswordMichel extends AppCompatActivity {
+public class ForgotPassword extends AppCompatActivity {
     MaterialButton recuperarBoton;
     TextInputEditText emailEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password_michel);
+        setContentView(R.layout.activity_forgot_password);
 
         recuperarBoton = findViewById(R.id.recuperarBoton);
         emailEditText = findViewById(R.id.emailEditText);
@@ -49,7 +49,7 @@ public class ForgotPasswordMichel extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(ForgotPasswordMichel.this, LoginActivityMichel.class);
+        Intent intent = new Intent(ForgotPassword.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -63,12 +63,12 @@ public class ForgotPasswordMichel extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(ForgotPasswordMichel.this, "Correo enviado", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(ForgotPasswordMichel.this, LoginActivityMichel.class);
+                            Toast.makeText(ForgotPassword.this, "Correo enviado", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ForgotPassword.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }else{
-                            Toast.makeText(ForgotPasswordMichel.this, "Correo no encontrado", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPassword.this, "Correo no encontrado", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

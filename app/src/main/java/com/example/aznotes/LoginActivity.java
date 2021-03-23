@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.regex.Pattern;
 
-public class LoginActivityMichel extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     TextView bienvenidoLabel, continuarLabel, nuevoUsuario, olvidasteContrasena;
     ImageView loginImageView;
     TextInputLayout usuarioTextField, contrasenaTextField;
@@ -31,7 +31,7 @@ public class LoginActivityMichel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_michel);
+        setContentView(R.layout.activity_login);
 
         loginImageView = findViewById(R.id.loginImageView);
         bienvenidoLabel = findViewById(R.id.bienvenidoLabel);
@@ -50,7 +50,7 @@ public class LoginActivityMichel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // La clase en la que estamos, y la clase a la que queremos ir
-                Intent intent = new Intent(LoginActivityMichel.this, SignUpActivity_Michel.class);
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
 
                 // Arreglo de animaciones
@@ -65,13 +65,13 @@ public class LoginActivityMichel extends AppCompatActivity {
                 pairs[6] = new Pair<View, String>(nuevoUsuario, "newUserTrans");
 
                 // Hace las animaciones si la versión es mayor a lollipop o igual
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivityMichel.this, pairs);
+                /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
                     startActivity(intent, options.toBundle());
                 }else{
                     startActivity(intent);
                     finish();
-                }
+                }*/
 
             }
         });
@@ -79,7 +79,7 @@ public class LoginActivityMichel extends AppCompatActivity {
         olvidasteContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivityMichel.this, ForgotPasswordMichel.class);
+                Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
                 startActivity(intent);
                 finish();
             }
@@ -106,7 +106,7 @@ public class LoginActivityMichel extends AppCompatActivity {
 
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
-            Toast.makeText(LoginActivityMichel.this, "Correo inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Correo inválido", Toast.LENGTH_SHORT).show();
 
             return;
         }else{
@@ -115,12 +115,12 @@ public class LoginActivityMichel extends AppCompatActivity {
 
         if(password.isEmpty() || password.length() < 6){
             passwordEditText.setError("Se necesitan más de 6 carácteres");
-            Toast.makeText(LoginActivityMichel.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
             return;
 
         }else if(!Pattern.compile("[0-9]").matcher(password).find()){
             passwordEditText.setError("La contraseña necesita al menos un número");
-            Toast.makeText(LoginActivityMichel.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
 
             return;
         }else{
@@ -134,13 +134,13 @@ public class LoginActivityMichel extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(LoginActivityMichel.this, "¡Has iniciado sesión correctamente!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "¡Has iniciado sesión correctamente!", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(LoginActivityMichel.this, ProfileInfoActivityMichel.class);
+                            Intent intent = new Intent(LoginActivity.this, ProfileInfoActivity.class);
                             startActivity(intent);
                             finish();
                         }else{
-                            Toast.makeText(LoginActivityMichel.this, "Credenciales equivocadas, intenta de nuevo." + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Credenciales equivocadas, intenta de nuevo." + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
