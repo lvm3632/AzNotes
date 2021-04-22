@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ForgotPassword extends AppCompatActivity {
     MaterialButton recuperarBoton;
     TextInputEditText emailEditText;
-
+    protected static boolean forgotPasswordFlag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +40,10 @@ public class ForgotPassword extends AppCompatActivity {
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
             Toast.makeText(this, "Por favor, ingresa un correo válido", Toast.LENGTH_SHORT).show();
+            ForgotPassword.forgotPasswordFlag=false;
             return;
         }
+
         sendEmail(email);
     }
 
@@ -63,14 +65,18 @@ public class ForgotPassword extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+
+
                             Toast.makeText(ForgotPassword.this, "Correo enviado", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ForgotPassword.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }else{
+                            ForgotPassword.forgotPasswordFlag=false;
                             Toast.makeText(ForgotPassword.this, "Correo no encontrado", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            ForgotPassword.forgotPasswordFlag=true;
     }
 }

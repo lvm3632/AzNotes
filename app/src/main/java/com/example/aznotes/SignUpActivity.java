@@ -56,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private static boolean isNewUser = false;
 
+    protected static boolean signUpFlag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -111,21 +112,31 @@ public class SignUpActivity extends AppCompatActivity{
         if(nombre.isEmpty()){
             nameTextField.setError("Ingresa un nombre");
             Toast.makeText(SignUpActivity.this, "Campo vacío", Toast.LENGTH_SHORT).show();
+            SignUpActivity.signUpFlag=false;
             return;
         }
+
 
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
             Toast.makeText(SignUpActivity.this, "Correo inválido", Toast.LENGTH_SHORT).show();
+            SignUpActivity.signUpFlag=false;
             return;
         }else{
             emailEditText.setError(null);
         }
+        if(confirmPassword.isEmpty() && password.isEmpty()){
+            SignUpActivity.signUpFlag=false;
+            Toast.makeText(SignUpActivity.this, "Llena todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(password.isEmpty() || confirmPassword.isEmpty() || password.length() < 6 || confirmPassword.length() < 6 ){
             passwordEditText.setError("Se necesitan más de 6 carácteres");
+            SignUpActivity.signUpFlag=false;
             Toast.makeText(SignUpActivity.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
         }else if(!Pattern.compile("[0-9]").matcher(password).find()){
             passwordEditText.setError("La contraseña necesita al menos un número");
+            SignUpActivity.signUpFlag=false;
             Toast.makeText(SignUpActivity.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
             return;
         }else{
@@ -134,9 +145,11 @@ public class SignUpActivity extends AppCompatActivity{
 
         if(!confirmPassword.equals(password)){
             confirmPasswordEditText.setError("Deben ser iguales");
+            SignUpActivity.signUpFlag=false;
             Toast.makeText(SignUpActivity.this, "Las contraseñas deben ser iguales", Toast.LENGTH_SHORT).show();
             return;
         }else{
+            SignUpActivity.signUpFlag=true;
             registrar(email, password,nombre);
         }
     }

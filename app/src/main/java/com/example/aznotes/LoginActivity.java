@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText emailEditText, passwordEditText;
     private FirebaseAuth mAuth;
 
+    protected static boolean changingScene=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
 
         mAuth = FirebaseAuth.getInstance();
+
+
+        LoginActivity.changingScene=false;
+
 
         nuevoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,46 +110,70 @@ public class LoginActivity extends AppCompatActivity {
     public void validate(){
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-
+        LoginActivity.changingScene=false;
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
+            LoginActivity.changingScene=false;
+            //Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             Toast.makeText(LoginActivity.this, "Correo inválido", Toast.LENGTH_SHORT).show();
-
             return;
         }else{
+            //LoginActivity.changingScene=false;
+           // Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+            LoginActivity.changingScene=false;
             emailEditText.setError(null);
         }
 
         if(password.isEmpty() || password.length() < 6){
+            LoginActivity.changingScene=false;
+            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             passwordEditText.setError("Se necesitan más de 6 carácteres");
             Toast.makeText(LoginActivity.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
             return;
 
         }else if(!Pattern.compile("[0-9]").matcher(password).find()){
+            LoginActivity.changingScene=false;
+            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             passwordEditText.setError("La contraseña necesita al menos un número");
             Toast.makeText(LoginActivity.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
 
             return;
         }else{
+            LoginActivity.changingScene=false;
             passwordEditText.setError(null);
         }
+        LoginActivity.changingScene=true;
+        Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+
         iniciarSesion(email, password);
     }
     public void iniciarSesion(String email, String password){
+        //LoginActivity.changingScene=false;
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if((LoginActivity.changingScene=task.isSuccessful())){
+                            LoginActivity.changingScene=true;
+                            Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoginActivity.this, "¡Has iniciado sesión correctamente!", Toast.LENGTH_SHORT).show();
-
+                            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
                             Intent intent = new Intent(LoginActivity.this, ProfileInfoActivity.class);
                             startActivity(intent);
                             finish();
+
                         }else{
+                            LoginActivity.changingScene=false;
+                            Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoginActivity.this, "Credenciales equivocadas, intenta de nuevo." + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
+    public void hola(){
+        Log.wtf("hola", "hola");
+    }
+
+
 }

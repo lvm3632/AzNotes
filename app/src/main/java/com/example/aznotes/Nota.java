@@ -44,6 +44,7 @@ public class Nota {
     }
 
     public void setFecha(String fecha) {
+
         String temp = fechalegible(fecha);
         this.fecha = unixSecondsToDate(temp);
     }

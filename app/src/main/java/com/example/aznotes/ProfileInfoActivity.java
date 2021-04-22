@@ -33,6 +33,9 @@ public class ProfileInfoActivity extends AppCompatActivity {
     private TextView saludo, lblUltimaNota, textNumeroDeNotas, textUltimaNota, tituloUltimaNota;
     private Button editarDatos;
 
+    //Testing
+    protected static boolean ProfileInfoActivityTest = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +49,33 @@ public class ProfileInfoActivity extends AppCompatActivity {
         tituloUltimaNota = findViewById(R.id.tituloUltimaNota);
 
         mAuth = FirebaseAuth.getInstance();
+
+        ProfileInfoActivityTest=false;
+       /* if(LoginActivity.changingScene){
+            LoginActivity.changingScene=true;
+        }else{
+            LoginActivity.changingScene=false;
+        }*/
+        //cambiarTrue();
     }
 
+
+    public void cambiarTrue(){
+        LoginActivity.changingScene=true;
+    }
+
+    public void cambiarFalse(){
+        LoginActivity.changingScene=false;
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         fStore = FirebaseFirestore.getInstance();
 
         if(mAuth.getCurrentUser() == null){
+           // cambiarFalse();
             FirebaseAuth.getInstance().signOut();
             FirebaseFirestore.getInstance().terminate();
             Intent i = new Intent(ProfileInfoActivity.this, LoginActivity.class);
@@ -62,10 +83,14 @@ public class ProfileInfoActivity extends AppCompatActivity {
             finish();
             return;
         }else{
+            //cambiarTrue();
             userId = mAuth.getCurrentUser().getUid();
+            //Log.wtf("Entro changing", LoginActivity.changingScene+"");
             actualizarSaludo();
             actualizarUltimaNota();
         }
+
+
     }
 
     public void actualizarSaludo(){
@@ -129,6 +154,7 @@ public class ProfileInfoActivity extends AppCompatActivity {
 
 
     public void logOut(View v){
+        ProfileInfoActivityTest=true;
         FirebaseAuth.getInstance().signOut();
         FirebaseFirestore.getInstance().terminate();
         Intent i = new Intent(ProfileInfoActivity.this, LoginActivity.class);
@@ -137,12 +163,14 @@ public class ProfileInfoActivity extends AppCompatActivity {
     }
 
     public void goToMenuGrid(View v){
+        ProfileInfoActivityTest=true;
         Intent irAlMenu =new Intent(this, GridMenuActivity.class);
         startActivity(irAlMenu);
         finish();
     }
 
     public void escribirNota(View v){
+        ProfileInfoActivityTest=true;
         Intent escribirNota = new Intent(this,EscribirNota.class);
         startActivity(escribirNota);
         finish();
