@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/recorridoRow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,18 +17,33 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/celda"
+            android:layout_marginTop="6sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@drawable/selector"
             android:minHeight="65dp">
+
+
+            <ImageView
+                android:id="@+id/img_nota"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/write_note"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/celda"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/id_nota"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="60dp"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/img_nota"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -36,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/id_nota"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/titulo_nota"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/texto_nota"
                 app:layout_constraintTop_toTopOf="parent" />

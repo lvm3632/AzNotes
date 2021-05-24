@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,7 +37,7 @@ public class ProfileInfoActivity extends AppCompatActivity {
     private Button editarDatos;
 
     //Testing
-    protected static boolean ProfileInfoActivityTest = false;
+    //protected static boolean ProfileInfoActivityTest = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +53,51 @@ public class ProfileInfoActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        ProfileInfoActivityTest=false;
+        //ProfileInfoActivityTest=false;
        /* if(LoginActivity.changingScene){
             LoginActivity.changingScene=true;
         }else{
             LoginActivity.changingScene=false;
         }*/
         //cambiarTrue();
+
+        // Menu
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_1:
+                        //Add your action onClick
+                        //Toast.makeText(ProfileInfoActivity.this, "ITEM1", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.page_2:
+                        //Toast.makeText(ProfileInfoActivity.this, "ITEM2", Toast.LENGTH_SHORT).show();
+                        escribirNota(findViewById(android.R.id.content).getRootView());
+
+                        break;
+
+                    case R.id.page_3:
+                        //Toast.makeText(ProfileInfoActivity.this, "ITEM3", Toast.LENGTH_SHORT).show();
+                        cambiarAMisNotas(findViewById(android.R.id.content).getRootView());
+                        break;
+                }
+                return false;
+            }
+        });
+        // End of menu
+
     }
 
 
-    public void cambiarTrue(){
+    /*public void cambiarTrue(){
         LoginActivity.changingScene=true;
-    }
+    }*/
 
-    public void cambiarFalse(){
+    /*public void cambiarFalse(){
         LoginActivity.changingScene=false;
-    }
+    }*/
 
     @Override
     protected void onStart() {
@@ -154,7 +185,7 @@ public class ProfileInfoActivity extends AppCompatActivity {
 
 
     public void logOut(View v){
-        ProfileInfoActivityTest=true;
+        //ProfileInfoActivityTest=true;
         FirebaseAuth.getInstance().signOut();
         FirebaseFirestore.getInstance().terminate();
         Intent i = new Intent(ProfileInfoActivity.this, LoginActivity.class);
@@ -163,17 +194,25 @@ public class ProfileInfoActivity extends AppCompatActivity {
     }
 
     public void goToMenuGrid(View v){
-        ProfileInfoActivityTest=true;
+        //ProfileInfoActivityTest=true;
         Intent irAlMenu =new Intent(this, GridMenuActivity.class);
         startActivity(irAlMenu);
         finish();
     }
 
     public void escribirNota(View v){
-        ProfileInfoActivityTest=true;
+        //ProfileInfoActivityTest=true;
         Intent escribirNota = new Intent(this,EscribirNota.class);
         startActivity(escribirNota);
         finish();
     }
+
+    private void cambiarAMisNotas(View v) {
+        Intent i = new Intent(this, RecyclerActivityNotas.class);
+        startActivity(i);
+        finish();
+    }
+
+
 
 }

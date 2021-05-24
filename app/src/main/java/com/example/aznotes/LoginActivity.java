@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText emailEditText, passwordEditText;
     private FirebaseAuth mAuth;
 
-    protected static boolean changingScene=false;
+    //protected static boolean changingScene=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        LoginActivity.changingScene=false;
+        //LoginActivity.changingScene=false;
 
 
         nuevoUsuario.setOnClickListener(new View.OnClickListener() {
@@ -110,40 +110,40 @@ public class LoginActivity extends AppCompatActivity {
     public void validate(){
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
-        LoginActivity.changingScene=false;
+        //LoginActivity.changingScene=false;
         if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             emailEditText.setError("Correo inválido");
-            LoginActivity.changingScene=false;
+            //LoginActivity.changingScene=false;
             //Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             Toast.makeText(LoginActivity.this, "Correo inválido", Toast.LENGTH_SHORT).show();
             return;
         }else{
             //LoginActivity.changingScene=false;
            // Log.wtf("LoginActivity", LoginActivity.changingScene+"");
-            LoginActivity.changingScene=false;
+            //LoginActivity.changingScene=false;
             emailEditText.setError(null);
         }
 
         if(password.isEmpty() || password.length() < 6){
-            LoginActivity.changingScene=false;
-            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+            //LoginActivity.changingScene=false;
+            //Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             passwordEditText.setError("Se necesitan más de 6 carácteres");
             Toast.makeText(LoginActivity.this, "Se necesitan más de 6 carácteres de contraseña", Toast.LENGTH_SHORT).show();
             return;
 
         }else if(!Pattern.compile("[0-9]").matcher(password).find()){
-            LoginActivity.changingScene=false;
-            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+            //LoginActivity.changingScene=false;
+            // Log.wtf("LoginActivity", LoginActivity.changingScene+"");
             passwordEditText.setError("La contraseña necesita al menos un número");
             Toast.makeText(LoginActivity.this, "La contraseña necesita al menos un número", Toast.LENGTH_SHORT).show();
 
             return;
         }else{
-            LoginActivity.changingScene=false;
+            //LoginActivity.changingScene=false;
             passwordEditText.setError(null);
         }
-        LoginActivity.changingScene=true;
-        Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+        //LoginActivity.changingScene=true;
+       // Log.wtf("LoginActivity", LoginActivity.changingScene+"");
 
         iniciarSesion(email, password);
     }
@@ -153,18 +153,18 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if((LoginActivity.changingScene=task.isSuccessful())){
-                            LoginActivity.changingScene=true;
-                            Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
+                        if((task.isSuccessful())){
+                           // LoginActivity.changingScene=true;
+                            //Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoginActivity.this, "¡Has iniciado sesión correctamente!", Toast.LENGTH_SHORT).show();
-                            Log.wtf("LoginActivity", LoginActivity.changingScene+"");
+                            //Log.wtf("LoginActivity", LoginActivity.changingScene+"");
                             Intent intent = new Intent(LoginActivity.this, ProfileInfoActivity.class);
                             startActivity(intent);
                             finish();
 
                         }else{
-                            LoginActivity.changingScene=false;
-                            Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
+                            //LoginActivity.changingScene=false;
+                            //Toast.makeText(LoginActivity.this, "Valor variable boolean" + LoginActivity.changingScene, Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoginActivity.this, "Credenciales equivocadas, intenta de nuevo." + task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -174,6 +174,8 @@ public class LoginActivity extends AppCompatActivity {
     public void hola(){
         Log.wtf("hola", "hola");
     }
+
+
 
 
 }

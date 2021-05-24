@@ -38,7 +38,8 @@ public class NotasAdapter  extends RecyclerView.Adapter<NotaViewHolder>{
         }else{
             holder.texto.setText(HT_Notas.get(pos).getTexto());
         }*/
-        holder.fecha.setText("Fecha: " + HT_Notas.get(pos).getFecha());
+        String fecha[] = HT_Notas.get(pos).getFecha().split(" ");
+        holder.fecha.setText("- Fecha: " + fecha[0]);
     }
 
     @Override

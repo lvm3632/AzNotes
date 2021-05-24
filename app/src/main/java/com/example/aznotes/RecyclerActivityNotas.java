@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -60,6 +62,36 @@ public class RecyclerActivityNotas extends AppCompatActivity implements View.OnC
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewNotas.setLayoutManager(llm);
         recyclerViewNotas.setAdapter(this.adapter);
+
+
+        // Menu
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.page_1:
+                        //Add your action onClick
+                        //Toast.makeText(RecyclerActivityNotas.this, "ITEM1", Toast.LENGTH_SHORT).show();
+                        cambiarAMiPerfil(findViewById(android.R.id.content).getRootView());
+                        break;
+                    case R.id.page_2:
+                        //Toast.makeText(RecyclerActivityNotas.this, "ITEM2", Toast.LENGTH_SHORT).show();
+                        escribirNota(findViewById(android.R.id.content).getRootView());
+
+                        break;
+
+                    case R.id.page_3:
+                        //Toast.makeText(RecyclerActivityNotas.this, "ITEM3", Toast.LENGTH_SHORT).show();
+                        cambiarAMisNotas(findViewById(android.R.id.content).getRootView());
+                        break;
+                }
+                return false;
+            }
+        });
+        // End of menu
+
     }
     @Override
     public void onBackPressed() {
@@ -176,6 +208,24 @@ public class RecyclerActivityNotas extends AppCompatActivity implements View.OnC
                 }
             }
         });
+    }
+
+    public void escribirNota(View v){
+        Intent escribirNota = new Intent(this,EscribirNota.class);
+        startActivity(escribirNota);
+        finish();
+    }
+
+    public void cambiarAMiPerfil(View v){
+        Intent irPerfil = new Intent(this,ProfileInfoActivity.class);
+        startActivity(irPerfil);
+        finish();
+    }
+
+    private void cambiarAMisNotas(View v) {
+        Intent i = new Intent(this, RecyclerActivityNotas.class);
+        startActivity(i);
+        finish();
     }
 
 }
